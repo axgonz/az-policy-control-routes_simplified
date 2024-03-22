@@ -1,0 +1,10 @@
+{
+    "if": {
+      "allof": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Network/routeTables"
+        }
+      ]
+    }
+  }

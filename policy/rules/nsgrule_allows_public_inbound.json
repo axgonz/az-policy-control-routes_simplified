@@ -1,0 +1,97 @@
+{
+  "if":{
+    "allof": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Network/networkSecurityGroups/securityRules"
+      },
+      {
+        "field": "Microsoft.Network/networkSecurityGroups/securityRules/access",
+        "equals": "Allow"
+      },
+      {
+        "field": "Microsoft.Network/networkSecurityGroups/securityRules/direction",
+        "equals": "Inbound"
+      },
+      {
+        "not": {
+          "anyof": [
+            {
+              "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+              "equals": "VirtualNetwork"
+            },
+            {
+              "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+              "equals": "AzureLoadBalancer"
+            },
+            {
+              "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+              "like": "10.*"
+            },
+            {
+              "value": "[take(field('Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix'), 7)]",
+              "in": [
+                "172.16.",
+                "172.17.",
+                "172.18.",
+                "172.19.",
+                "172.20.",
+                "172.21.",
+                "172.22.",
+                "172.23.",
+                "172.24.",
+                "172.25.",
+                "172.26.",
+                "172.27.",
+                "172.28.",
+                "172.29.",
+                "172.30.",
+                "172.31."
+              ]
+            },
+            {
+              "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefix",
+              "like": "192.168.*"
+            },
+            {
+              "value": "[length(field('Microsoft.Network/networkSecurityGroups/securityRules/sourceApplicationSecurityGroups'))]",
+              "greater": 0
+            },
+            {
+              "not": {
+                "anyof": [
+                  {
+                    "value": "[length(field('Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefixes'))]",
+                    "equals": 0
+                  },
+                  {
+                    "count": {
+                      "field": "Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefixes[*]",
+                      "where": {
+                        "allof": [
+                          {
+                            "value": "[ipRangeContains('10.0.0.0/8', current('Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefixes[*]'))]",
+                            "equals": false
+                          },
+                          {
+                            "value": "[ipRangeContains('172.16.0.0/12', current('Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefixes[*]'))]",
+                            "equals": false
+                          },
+                          {
+                            "value": "[ipRangeContains('192.168.0.0/16', current('Microsoft.Network/networkSecurityGroups/securityRules/sourceAddressPrefixes[*]'))]",
+                            "equals": false
+                          }
+                        ]
+                      }
+                    },
+                    "greater": 0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

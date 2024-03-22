@@ -1,0 +1,80 @@
+{
+  "effect": {
+    "type": "string",
+    "metadata": {
+        "description": "Selecting 'deny' will prevent non-compliant resources from being deployed.",
+        "type": "string",
+        "displayName": "Effect - audit/deny",
+        "defaultValue": "audit",
+        "allowedValues": [
+            "audit",
+            "deny"
+        ]
+    }
+  },
+  "location": {
+    "type": "string",
+    "metadata": {
+        "description": "The locations specific to this assignment",
+        "displayName": "Location",
+        "strongType": "location"
+    }
+  },
+  "lock": {
+    "type": "string",
+    "metadata": {
+        "description": "Specify the resource lock type",
+        "type": "string",
+        "displayName": "Lock - CanNotDelete/ReadOnly",
+        "defaultValue": "CanNotDelete",
+        "allowedValues": [
+            "CanNotDelete",
+            "ReadOnly"
+        ]
+    }
+  },
+  "nextHopIpAddress": {
+    "type": "string",
+    "metadata": {
+        "description": "The next hop IP address to be used with the default route address prefix.",
+        "displayName": "Next hop IP address"
+    }
+  },
+  "excludedSubnets": {
+    "type": "array",
+    "metadata": {
+        "description": "An array of subnet resource Ids to exclude from this policy.",
+        "displayName": "Excluded subnets",
+        "strongType": "Microsoft.Network/virtualNetworks/subnets"
+    }
+  },
+  "allowedLocations": {
+    "type": "array",
+    "metadata": {
+        "description": "The list of locations that can be specified when deploying resources",
+        "displayName": "Allowed locations",
+        "strongType": "location"
+    }
+  },
+  "routeTableName": {
+    "type": "string",
+    "metadata": {
+        "description": "The name of the resource.",
+        "displayName": "Route table name"
+    }
+  },
+  "networkSecurityGroupName": {
+    "type": "string",
+    "metadata": {
+        "description": "The name of the resource.",
+        "displayName": "Network security group name"
+    }
+  },
+  "resourceGroupName": {
+    "type": "string",
+    "metadata": {
+        "description": "The name of the resource group.",
+        "displayName": "Resource group name"
+    }
+  }
+}

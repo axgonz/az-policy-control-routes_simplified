@@ -1,0 +1,6 @@
+{
+  "if": {
+      "field": "type",
+      "equals": "Microsoft.Resources/subscriptions"
+  }
+}

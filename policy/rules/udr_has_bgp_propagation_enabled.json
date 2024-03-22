@@ -1,0 +1,14 @@
+{
+  "if": {
+    "allof": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Network/routeTables"
+      },
+      {
+        "field": "Microsoft.Network/routeTables/disableBgpRoutePropagation",
+        "notEquals": true
+      }
+    ]
+  }
+}

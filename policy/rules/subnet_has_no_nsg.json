@@ -1,0 +1,14 @@
+{
+  "if": {
+    "allof": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Network/virtualNetworks/subnets"
+      },
+      {
+        "field": "Microsoft.Network/virtualNetworks/subnets/networkSecurityGroup.id",
+        "exists": false
+      }
+    ]
+  }
+}

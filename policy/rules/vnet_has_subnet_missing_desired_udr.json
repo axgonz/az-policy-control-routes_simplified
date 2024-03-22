@@ -1,0 +1,22 @@
+{
+  "if": {
+    "allof": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Network/virtualNetworks"
+      },
+      {
+        "field": "location",
+        "equals": "[parameters('location')]"
+      },
+      {
+        "field": "Microsoft.Network/virtualNetworks/subnets[*].routeTable.id",
+        "notLike": "[concat('/subscriptions/*/resourceGroups/', parameters('resourceGroupName'), '/providers/Microsoft.Network/routeTables/', parameters('routeTableName'))]"
+      },
+      {
+        "field": "Microsoft.Network/virtualNetworks/subnets[*].id",
+        "notIn": "[parameters('excludedSubnets')]"
+      }
+    ]
+  }
+}

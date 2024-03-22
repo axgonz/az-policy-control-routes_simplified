@@ -1,0 +1,45 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "category": "algonz"
+  },
+  "policy": {
+    "deployAssignments": false
+  },
+  "stacks": {
+    "targetSubscriptions": [
+      "189ab2d2-5fbf-4349-90d5-65601910af71"
+    ]
+  },
+  "managementGroupName": "policy_definitions",
+  "resourceGroupName": "policy_enforced_resource_group",
+  "vnet": {
+    "allowedLocations": [
+      "australiacentral",
+      "australiaeast",
+      "australiasoutheast"
+    ]
+  },
+  "routeTable": {
+    "name": "policy_enforced_udr",
+    "excludedSubnets": [
+      "/subscriptions/189ab2d2-5fbf-4349-90d5-65601910af71/resourceGroups/3p-firewalls/providers/Microsoft.Network/virtualNetworks/test-vnet-1/subnets/SpecialSubnet"
+    ]
+  },
+  "networkSecurityGroup": {
+    "name": "policy_enforced_nsg",
+    "excludedSubnets": [
+      "/subscriptions/189ab2d2-5fbf-4349-90d5-65601910af71/resourceGroups/3p-firewalls/providers/Microsoft.Network/virtualNetworks/test-vnet-1/subnets/SpecialSubnet"
+    ]
+  },
+  "regionPrefixLookup": {
+    "australiacentral": "auc",
+    "australiaeast": "aue",
+    "australiasoutheast": "ase"
+  },
+  "nextHopIpAddressLookup": {
+    "australiacentral": "10.0.0.4",
+    "australiaeast": "10.1.0.4",
+    "australiasoutheast": "10.2.0.4"
+  }
+}

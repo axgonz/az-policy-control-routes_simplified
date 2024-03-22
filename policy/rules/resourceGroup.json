@@ -1,0 +1,14 @@
+{
+  "if": {
+    "allof": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Resources/subscriptions/resourceGroups"
+      },
+      {
+        "field": "name",
+        "equals": "[parameters('resourceGroupName')]"
+      }
+    ]
+  }
+}

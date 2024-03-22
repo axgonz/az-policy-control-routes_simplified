@@ -1,0 +1,56 @@
+{
+  "if": {
+    "allof": [
+      {
+        "field": "type",
+        "equals": "Microsoft.Network/routeTables"
+      },
+      {
+        "field": "location",
+        "equals": "[parameters('location')]"
+      },
+      {
+        "anyof": [
+          {
+            "field": "Microsoft.Network/routeTables/disableBgpRoutePropagation",
+            "notEquals": true
+          },
+          {
+            "count": {
+              "field": "Microsoft.Network/routeTables/routes[*]"
+            },
+            "notEquals": 1
+          },
+          {
+            "not": {
+              "count": {
+                "field": "Microsoft.Network/routeTables/routes[*]",
+                "where": {
+                  "allof": [
+                    {
+                      "field": "Microsoft.Network/routeTables/routes[*].hasBgpOverride",
+                      "equals": false
+                    },
+                    {
+                      "field": "Microsoft.Network/routeTables/routes[*].addressPrefix",
+                      "equals": "0.0.0.0/0"
+                    },
+                    {
+                      "field": "Microsoft.Network/routeTables/routes[*].nextHopType",
+                      "equals": "VirtualAppliance"
+                    },
+                    {
+                      "field": "Microsoft.Network/routeTables/routes[*].nextHopIpAddress",
+                      "equals": "[parameters('nextHopIpAddress')]"
+                    }
+                  ]
+                }
+              },
+              "greater": 0
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
